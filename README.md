@@ -1,8 +1,8 @@
 # Dynamic Logging with Ammonite
 
-This is an [Ammonite](http://ammonite.io/) script that demonstrates how you can 
-use [Echopraxia](com/tersesystems/echopraxia-plusscala) to control logging 
-dynamically while the script is running.
+This is an [Ammonite](http://ammonite.io/) script that demonstrates how you can use [Echopraxia](com/tersesystems/echopraxia-plusscala) to control logging dynamically while the script is running.
+
+The [watch service](https://github.com/tersesystems/echopraxia#watched-scripts) will monitor the tweakflow file and recompile if it sees it has been touched.
 
 The script uses Tweakflow, which is a secure embedded language.  If you want to play around with Tweakflow, this is a good place to start.
 
