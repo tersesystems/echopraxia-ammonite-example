@@ -4,6 +4,12 @@ This is an [Ammonite](http://ammonite.io/) script that demonstrates how you can
 use [Echopraxia](com/tersesystems/echopraxia-plusscala) to control logging 
 dynamically while the script is running.
 
+The script uses Tweakflow, which is a secure embedded language.  If you want to play around with Tweakflow, this is a good place to start.
+
+* [Getting Started](https://twineworks.github.io/tweakflow/getting-started.html)
+* [Reference Guide](https://twineworks.github.io/tweakflow/reference.html)
+* [Standard Library](https://twineworks.github.io/tweakflow/modules/std.html)
+
 To run, install Ammonite and then `amm script.sc` will print logs to console.
 
 Then edit `tweakflow.tf` while the program is running to see output either on or off.
