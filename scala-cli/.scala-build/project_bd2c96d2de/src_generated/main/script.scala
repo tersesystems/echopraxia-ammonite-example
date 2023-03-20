@@ -1,10 +1,15 @@
-import $ivy.{        
-  `com.tersesystems.echopraxia.plusscala::logger:1.1.2`,
-  `com.tersesystems.echopraxia:scripting:2.2.4`,
-  `com.tersesystems.echopraxia:logstash:2.2.4`,
-  `com.tersesystems.logback:logback-classic:1.2.0`,
-  `com.lihaoyi::os-lib:0.9.1`
-}
+
+
+
+
+object script {
+/*<script>*///> using scala "2.13.8"
+
+//> using dep "com.tersesystems.echopraxia.plusscala::logger:1.1.2"
+//> using dep "com.tersesystems.echopraxia:scripting:2.3.0-RC1"
+//> using dep "com.tersesystems.echopraxia:logstash:2.3.0-RC1"
+//> using dep "com.tersesystems.logback:logback-classic:1.2.0"
+//> using dep "com.lihaoyi::os-lib:0.9.1"
 
 import com.tersesystems.echopraxia.plusscala._
 import com.tersesystems.echopraxia.plusscala.api._
@@ -32,7 +37,6 @@ object TweakFlow {
   """.stripMargin
 }
 
-@main
 def main() = {
   // No logback.xml, we're doing it live       
   val changer = new ChangeLogLevel
@@ -58,3 +62,24 @@ def main() = {
     }
   }
 }
+
+main()/*</script>*/ /*<generated>*/
+def args = script_sc.args$
+  /*</generated>*/
+}
+
+object script_sc {
+  private var args$opt0 = Option.empty[Array[String]]
+  def args$set(args: Array[String]): Unit = {
+    args$opt0 = Some(args)
+  }
+  def args$opt: Option[Array[String]] = args$opt0
+  def args$: Array[String] = args$opt.getOrElse {
+    sys.error("No arguments passed to this script")
+  }
+  def main(args: Array[String]): Unit = {
+    args$set(args)
+    script.hashCode() // hasCode to clear scalac warning about pure expression in statement position
+  }
+}
+

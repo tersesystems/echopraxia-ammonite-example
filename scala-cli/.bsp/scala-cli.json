@@ -1,0 +1,16 @@
+{
+  "name": "scala-cli",
+  "argv": [
+    "/home/wsargent/.cache/scalacli/local-repo/bin/scala-cli/scala-cli",
+    "bsp",
+    "--json-options",
+    "/home/wsargent/work/echopraxia-ammonite-example/scala-cli/.scala-build/ide-options-v2.json",
+    "/home/wsargent/work/echopraxia-ammonite-example/scala-cli"
+  ],
+  "version": "0.2.1",
+  "bspVersion": "2.1.0-M3",
+  "languages": [
+    "scala",
+    "java"
+  ]
+}

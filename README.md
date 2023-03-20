@@ -10,11 +10,15 @@ The script uses Tweakflow, which is a secure embedded language.  If you want to 
 * [Reference Guide](https://twineworks.github.io/tweakflow/reference.html)
 * [Standard Library](https://twineworks.github.io/tweakflow/modules/std.html)
 
-## Ammonite
+## Scala CLI
 
-To run, install [Ammonite](http://ammonite.io/) and then `amm script.sc` will print logs to console.
+To run, install [scala-cli](https://scala-cli.virtuslab.org/) and then `scala-cli ./script.sc` will print logs to console.
 
 Then edit `tweakflow.tf` while the program is running to see output either on or off.
+
+Using Visual Studio Code is recommended as you can run [`scala-cli setup-ide .`](https://scala-cli.virtuslab.org/docs/cookbooks/vscode) to set up configuration, and run [Metals](https://scala-cli.virtuslab.org/docs/guides/ide/#metals). 
+
+There is also a [Tweakflow mode](https://marketplace.visualstudio.com/items?itemName=twineworks.tweakflow) for VS code.
 
 ## JBang
 
