@@ -1,3 +1,6 @@
 *.tf
 .metals/
 .vscode/
+
+scala-cli/.scala-build/*
+scala-cli/.bsp/
