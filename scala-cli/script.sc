@@ -1,8 +1,8 @@
 //> using scala "2.13.8"
 
-//> using dep "com.tersesystems.echopraxia.plusscala::logger:1.2.0"
-//> using dep "com.tersesystems.echopraxia:scripting:2.3.0"
-//> using dep "com.tersesystems.echopraxia:logstash:2.3.0"
+//> using dep "com.tersesystems.echopraxia.plusscala::logger:1.2.1"
+//> using dep "com.tersesystems.echopraxia:scripting:2.3.1"
+//> using dep "com.tersesystems.echopraxia:logstash:2.3.1"
 //> using dep "com.tersesystems.logback:logback-classic:1.2.0"
 //> using dep "com.lihaoyi::os-lib:0.9.1"
 
