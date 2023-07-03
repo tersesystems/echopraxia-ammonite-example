@@ -1,7 +1,7 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
-//DEPS com.tersesystems.echopraxia:logger:3.0.0
-//DEPS com.tersesystems.echopraxia:logstash:3.0.0
-//DEPS com.tersesystems.echopraxia:scripting:3.0.0
+//DEPS com.tersesystems.echopraxia:logger:3.0.1
+//DEPS com.tersesystems.echopraxia:logstash:3.0.1
+//DEPS com.tersesystems.echopraxia:scripting:3.0.1
 //DEPS com.tersesystems.logback:logback-classic:1.2.0
 //DEPS ch.qos.logback:logback-classic:1.4.8
 //DEPS net.logstash.logback:logstash-logback-encoder:7.4
