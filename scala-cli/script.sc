@@ -1,13 +1,13 @@
 //> using scala "2.13.10"
 
-//> using dep "com.tersesystems.echopraxia.plusscala::logger:1.3.0"
-//> using dep "com.tersesystems.echopraxia:scripting:3.0.2"
-//> using dep "com.tersesystems.echopraxia:logstash:3.0.2"
+//> using dep "com.tersesystems.echopraxia.plusscala::logger:1.4.0-RC1"
+//> using dep "com.tersesystems.echopraxia:scripting:3.2.0"
+//> using dep "com.tersesystems.echopraxia:logstash:3.2.0"
 //> using dep "com.tersesystems.logback:logback-classic:1.2.0"
-//> using dep "ch.qos.logback:logback-classic:1.4.8"
+//> using dep "ch.qos.logback:logback-classic:1.5.6"
 //> using dep "net.logstash.logback:logstash-logback-encoder:7.4"
 
-//> using dep "com.lihaoyi::os-lib:0.9.1"
+//> using dep "com.lihaoyi::os-lib:0.10.0"
 
 import com.tersesystems.echopraxia.plusscala._
 import com.tersesystems.echopraxia.plusscala.api._
