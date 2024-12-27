@@ -1,21 +1,21 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
-//DEPS com.tersesystems.echopraxia:logger:3.2.0
-//DEPS com.tersesystems.echopraxia:logstash:3.2.0
-//DEPS com.tersesystems.echopraxia:scripting:3.2.0
-//DEPS com.tersesystems.logback:logback-classic:1.2.0
-//DEPS ch.qos.logback:logback-classic:1.5.6
-//DEPS net.logstash.logback:logstash-logback-encoder:7.4
+//DEPS com.tersesystems.echopraxia:simple:4.0.0
+//DEPS com.tersesystems.echopraxia:logstash:4.0.0
+//DEPS com.tersesystems.echopraxia:scripting:4.0.0
+//DEPS ch.qos.logback:logback-classic:1.5.15
+//DEPS net.logstash.logback:logstash-logback-encoder:8.0
 
-import com.tersesystems.echopraxia.*;
-import com.tersesystems.echopraxia.api.*;
-import com.tersesystems.echopraxia.scripting.*;
-import com.tersesystems.logback.classic.ChangeLogLevel;
+import echopraxia.api.*;
+import echopraxia.logging.api.*;
+import echopraxia.scripting.*;
+import echopraxia.simple.*;
 
-import java.nio.*;
 import java.nio.file.*;
 
+import ch.qos.logback.classic.LoggerContext;
+
 public class Script {
-    private static final Logger<PresentationFieldBuilder> logger = LoggerFactory.getLogger(Script.class);
+    private static Logger logger;
 
     private static final String defaultScript = """
         import * as std from "std";
@@ -31,21 +31,30 @@ public class Script {
         """;
 
     public static void main(String... args) throws java.io.IOException {
-        ChangeLogLevel changer = new ChangeLogLevel();
-        changer.changeLogLevel("ROOT", "INFO");
-        changer.changeLogLevel(logger.getName(), "DEBUG");
-
         Path watchedDir = Paths.get(".");
         ScriptWatchService watchService = new ScriptWatchService(watchedDir);
-        Path filePath = watchedDir.resolve("tweakflow.tf");
 
-        if (! Files.exists(filePath)) {
-            Files.writeString(filePath, defaultScript);
+        try (watchService) {
+            Path filePath = watchedDir.resolve("tweakflow.tf");
+
+            if (! Files.exists(filePath)) {
+                Files.writeString(filePath, defaultScript);
+            }
+    
+            ScriptHandle watchedHandle = watchService.watchScript(filePath, e -> System.err.println("Script compilation error " + e.toString()));
+            Condition condition = ScriptCondition.create(watchedHandle);
+    
+            logger = LoggerFactory.getLogger(Script.class).withCondition(condition);
+        
+            // Set log levels as necessary
+            var loggerContext = (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory();
+            var rootLogger = loggerContext.getLogger("ROOT");
+            rootLogger.setLevel(ch.qos.logback.classic.Level.INFO);
+            var thisLogger = loggerContext.getLogger(Script.class);
+            thisLogger.setLevel(ch.qos.logback.classic.Level.DEBUG);
+            
+            var fb = FieldBuilder.instance();
+            logger.info("{}", fb.string("foo", "BAR"));
         }
-
-        ScriptHandle watchedHandle = watchService.watchScript(filePath, e -> logger.error("Script compilation error", e));
-        Condition condition = ScriptCondition.create(watchedHandle);
-
-        logger.info(condition, "{}", fb -> fb.string("foo", "BAR"));
     }
 }
