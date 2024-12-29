@@ -1,17 +1,18 @@
-//> using scala "2.13.10"
+//> using scala "3.6.2"
 
-//> using dep "com.tersesystems.echopraxia.plusscala::logger:1.4.0-RC1"
-//> using dep "com.tersesystems.echopraxia:scripting:3.2.0"
-//> using dep "com.tersesystems.echopraxia:logstash:3.2.0"
+//> using dep "com.tersesystems.echopraxia.plusscala::simple::2.0.0"
+//> using dep "com.tersesystems.echopraxia:scripting:4.0.0"
+//> using dep "com.tersesystems.echopraxia:logstash:4.0.0"
 //> using dep "com.tersesystems.logback:logback-classic:1.2.0"
-//> using dep "ch.qos.logback:logback-classic:1.5.6"
-//> using dep "net.logstash.logback:logstash-logback-encoder:7.4"
+//> using dep "ch.qos.logback:logback-classic:1.5.15"
+//> using dep "net.logstash.logback:logstash-logback-encoder:8.0"
 
-//> using dep "com.lihaoyi::os-lib:0.10.0"
+//> using dep "com.lihaoyi::os-lib:0.11.3"
 
-import com.tersesystems.echopraxia.plusscala._
-import com.tersesystems.echopraxia.plusscala.api._
-import com.tersesystems.echopraxia.scripting._
+import echopraxia.plusscala.simple._
+import echopraxia.plusscala.api._
+import echopraxia.plusscala.logging.api._
+import echopraxia.scripting._
 import com.tersesystems.logback.classic.ChangeLogLevel
 
 case class ScriptService(dir: os.Path) {
@@ -19,7 +20,7 @@ case class ScriptService(dir: os.Path) {
   
   def condition(path: os.Path) = {
     val scriptHandle = sws.watchScript(path.toNIO, _.printStackTrace)
-    ScriptCondition.create(scriptHandle).asScala
+    ScriptCondition.create(scriptHandle)
   }
 }
 
@@ -39,8 +40,6 @@ def main() = {
   // No logback.xml, we're doing it live       
   val changer = new ChangeLogLevel
   changer.changeLogLevel("ROOT", "INFO")
-  val logger = LoggerFactory.getLogger
-  changer.changeLogLevel(logger.name, "DEBUG")
 
   // Ensure a script exists and is watched
   val dir = os.pwd
@@ -51,10 +50,14 @@ def main() = {
   }
 
   // now we're sure the file exists, set up a condition and run in a loop.
-  val condition = service.condition(tweakflowFile)
+  val condition = service.condition(tweakflowFile).asScala
+  val logger = LoggerFactory.getLogger().withCondition(condition)
+  changer.changeLogLevel(logger.core.getName, "DEBUG")
+
+  val fb = FieldBuilder
   while (true) {
     try {
-      logger.debug(condition, "{}", fb => fb.keyValue("foo" -> "bar"));
+      logger.debug("{}", fb.keyValue("foo" -> "bar"));
     } finally {
       Thread.sleep(2000L);
     }
